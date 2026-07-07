@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Search any city to view the current weather, hourly forecast, and 7-day forecast using live weather data."
+    />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+
+    <title>Weather Forecast App</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header-top">
+        <div class="header-left">
+          <img src="assets/images/logo.svg" alt="Weather App Logo" />
+        </div>
+
+        <div class="header-right">
+          <div class="units-dropdown">
+            <button
+              class="units-btn"
+              type="button"
+              aria-label="Open units menu"
+              aria-expanded="false"
+            >
+              <img src="assets/images/icon-units.svg" alt="" />
+              <span>Units</span>
+              <img
+                src="assets/images/icon-dropdown.svg"
+                class="arrow"
+                alt=""
+                aria-hidden="true"
+              />
+            </button>
+
+            <div class="units-menu">
+              <h4>Switch to Imperial</h4>
+              <p class="menu-title">Temperature</p>
+              <div class="menu-item temp-option active" data-unit="celsius">
+                Celsius (°C)
+                <span class="check">✓</span>
+              </div>
+              <div class="menu-item temp-option" data-unit="fahrenheit">
+                Fahrenheit (°F)
+                <span class="check">✓</span>
+              </div>
+              <hr />
+              <p class="menu-title">Wind Speed</p>
+              <div class="menu-item wind-option active" data-unit="kmh">
+                km/h
+                <span class="check">✓</span>
+              </div>
+
+              <div class="menu-item wind-option" data-unit="mph">
+                mph
+                <span class="check">✓</span>
+              </div>
+              <hr />
+              <p class="menu-title">Precipitation</p>
+
+              <div class="menu-item rain-option active" data-unit="mm">
+                Millimeters
+                <span class="check">✓</span>
+              </div>
+
+              <div class="menu-item rain-option" data-unit="in">
+                Inches
+                <span class="check">✓</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <header class="header-bottom">
+        <h1>How's the sky looking today?</h1>
+        <div class="search-bar">
+          <div class="search-box">
+            <img
+              src="assets/images/icon-search.svg"
+              alt=""
+              aria-hidden="true"
+            />
+            <input
+              class="search-input"
+              type="text"
+              placeholder="Search for a place..."
+              aria-label="Search for a city"
+            />
+            <div class="search-suggestions"></div>
+          </div>
+          <button class="button-search" type="button" aria-label="Search">
+            Search
+          </button>
+        </div>
+      </header>
+      <div class="weather-state error-state hidden">
+        <h2>Something went wrong</h2>
+
+        <p>
+          We couldn't connect to the server (API error). Please try again in a
+          few moments.
+        </p>
+
+        <button
+          class="retry-btn"
+          type="button"
+          aria-label="Retry loading weather data"
+        >
+          Retry
+        </button>
+      </div>
+      <main class="main-content">
+        <div class="left-panel">
+          <div class="current-weather">
+            <img
+              src="assets/images/icon-sunny.webp"
+              alt="Sunny weather"
+              class="sun"
+            />
+            <img
+              src="assets/images/bg-today-large.svg"
+              class="bg-cloud"
+              alt=""
+              aria-hidden="true"
+            />
+
+            <div class="weather-info">
+              <div class="weather-content">
+                <h2 class="city-name">Berlin, Germany</h2>
+                <p class="current-date">Tuesday, Aug 5, 2025</p>
+              </div>
+
+              <h1 class="current-temp">68°</h1>
+            </div>
+            <div class="weather-state loading-state hidden">
+              <p>Loading...</p>
+            </div>
+          </div>
+          <div class="stats">
+            <div class="stat-card">
+              Feels like<span class="feels-like">64°</span>
+            </div>
+            <div class="stat-card">
+              Humidity<span class="humidity">46%</span>
+            </div>
+            <div class="stat-card">
+              Wind<span class="wind-speed">9 mph</span>
+            </div>
+            <div class="stat-card">
+              Precipitation<span class="precipitation">0 in</span>
+            </div>
+          </div>
+          <h4>Daily forecast</h4>
+          <div class="daily-forecast"></div>
+        </div>
+        <div class="right-panel">
+          <div class="title-hourly">
+            <h3>Hourly forecast</h3>
+
+            <div class="day-dropdown">
+              <button
+                class="day-btn"
+                type="button"
+                aria-label="Select forecast day"
+              >
+                Tuesday ▼
+              </button>
+
+              <div class="day-menu"></div>
+            </div>
+          </div>
+
+          <div class="hourly-list"></div>
+        </div>
+      </main>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
