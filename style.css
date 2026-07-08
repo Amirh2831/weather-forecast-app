@@ -476,7 +476,8 @@ hr {
   cursor: default;
   pointer-events: none;
 }
-@media (max-width: 375px) {
+
+@media (max-width: 400px) {
   .container {
     padding: 16px;
   }

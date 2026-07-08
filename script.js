@@ -54,6 +54,7 @@ let currentWeatherData = null;
 let currentHourlyData = null;
 let currentDailyData = null;
 let selectedDayIndex = 0;
+let currentTime = "";
 
 /* ======================================
    API Requests
@@ -82,6 +83,7 @@ async function getWeather(lat, lon) {
 
     weatherIcon.src = getWeatherIcon(weatherCode);
     currentHourlyData = data.hourly;
+    currentTime = data.current.time;
     currentDailyData = data.daily;
 
     renderHourlyForecast(currentHourlyData, selectedDayIndex);
@@ -234,8 +236,18 @@ currentDate.textContent = today.toLocaleDateString("en-US", options);
 function renderHourlyForecast(hourly, dayIndex) {
   hourlyList.innerHTML = "";
 
-  const start = dayIndex * 24;
-  const end = start + 8;
+  let start;
+
+  if (dayIndex === 0) {
+    // امروز → از ساعت فعلی شهر انتخاب‌شده
+    const currentHour = new Date(currentTime).getHours();
+    start = currentHour;
+  } else {
+    // روزهای بعد → از ساعت 00:00
+    start = dayIndex * 24;
+  }
+
+  const end = Math.min(start + 8, (dayIndex + 1) * 24);
 
   for (let i = start; i < end; i++) {
     const time = hourly.time[i];
@@ -246,6 +258,7 @@ function renderHourlyForecast(hourly, dayIndex) {
     }
 
     temp = Math.round(temp);
+
     const code = hourly.weather_code[i];
 
     const hour = new Date(time).toLocaleTimeString("en-US", {
